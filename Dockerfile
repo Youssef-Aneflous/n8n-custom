@@ -1,9 +1,12 @@
-FROM n8nio/n8n
+FROM n8nio/n8n:latest
 
 USER root
 
-RUN apt-get update && \
-    apt-get install -y unzip && \
-    npm install -g mammoth
+# Use Alpine-compatible package manager
+RUN apk add --no-cache unzip nodejs npm
 
-USER node 
+# Install mammoth globally
+RUN npm install -g mammoth
+
+USER node
+
